@@ -34,6 +34,11 @@ Dictionary Functions
 
 `func (d Dictionary) GetWordCount() uint64` - returns dictionary' word count (from ifo file)
 
+Additional links
+---
+  * Stardict format: https://code.google.com/p/babiloo/wiki/StarDict_format
+  * Dictionaries: http://abloz.com/huzheng/stardict-dic/
+
 Work Opportunities
 ---
 If you need a Golang developer feel free to contact with me :)
