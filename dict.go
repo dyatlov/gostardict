@@ -3,6 +3,7 @@ package gostardict
 import (
 	"compress/gzip"
 	"io"
+	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -25,6 +26,8 @@ func ReadDict(filename string, info *Info) (dict *Dict, err error) {
 		return
 	}
 
+	defer reader.Close()
+
 	var r io.Reader
 
 	if strings.HasSuffix(filename, ".dz") { // if file is compressed then read it from archive
@@ -37,25 +40,7 @@ func ReadDict(filename string, info *Info) (dict *Dict, err error) {
 		return
 	}
 
-	defer reader.Close()
-
-	bufSize := 1024 * 16 // 16 KBytes
-	p := make([]byte, bufSize, bufSize)
-
-	var buffer []byte
-
-	for {
-		n, err := r.Read(p)
-
-		if err != nil && err != io.EOF {
-			panic(err)
-		}
-		if n == 0 {
-			break
-		}
-
-		buffer = append(buffer, p[:n]...)
-	}
+	buffer, err := ioutil.ReadAll(r)
 
 	dict = new(Dict)
 	dict.buffer = buffer
