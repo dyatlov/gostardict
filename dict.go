@@ -42,6 +42,10 @@ func ReadDict(filename string, info *Info) (dict *Dict, err error) {
 
 	buffer, err := ioutil.ReadAll(r)
 
+	if err != nil {
+		return
+	}
+
 	dict = new(Dict)
 	dict.buffer = buffer
 
