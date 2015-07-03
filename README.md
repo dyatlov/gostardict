@@ -1,5 +1,11 @@
-GOSTARDICT
+GO STARDICT
 =======
+
+To download and install this package run:
+
+`go get github.com/dyatlov/gostardict/stardict`
+
+Source docs: http://godoc.org/github.com/dyatlov/gostardict/stardict
 
 Disclaimer
 ---

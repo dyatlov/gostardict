@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dyatlov/gostardict"
+	"github.com/dyatlov/gostardict/stardict"
 )
 
 func main() {
 	// init dictionary with path to dictionary files and name of dictionary
-	dict, err := gostardict.NewDictionary("/Users/dyatlov/Downloads/stardict-babylon-Babylon_English_Arabic-2.4.2", "Babylon_English_Arabic")
+	dict, err := stardict.NewDictionary("/Users/dyatlov/Downloads/stardict-babylon-Babylon_English_Arabic-2.4.2", "Babylon_English_Arabic")
 
 	if err != nil {
 		panic(err)

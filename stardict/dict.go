@@ -1,4 +1,4 @@
-package gostardict
+package stardict
 
 import (
 	"compress/gzip"
