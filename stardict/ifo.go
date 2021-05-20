@@ -59,7 +59,7 @@ func ReadInfo(filename string) (info *Info, err error) {
 		return
 	}
 
-	if kv != "2.4.2" && kv != "3.0.0" {
+	if kv != "2.4.2" && kv != "3.0.0" && kv != "2.4.2\r" &&kv != "3.0.0\r"{    // \r : fix the problem on windows
 		err = errors.New("Stardict version should be either 2.4.2 or 3.0.0")
 		return
 	}
