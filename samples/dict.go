@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"os"
 
@@ -9,8 +10,12 @@ import (
 )
 
 func main() {
+	dictPath := flag.String("p", "", "Specify directory where dictionary files are located")
+	dictName := flag.String("n", "", "Specify name of dictionary")
+	flag.Parse()
+
 	// init dictionary with path to dictionary files and name of dictionary
-	dict, err := stardict.NewDictionary("/Users/dyatlov/Downloads/stardict-babylon-Babylon_English_Arabic-2.4.2", "Babylon_English_Arabic")
+	dict, err := stardict.NewDictionary(*dictPath, *dictName)
 
 	if err != nil {
 		panic(err)
@@ -18,6 +23,7 @@ func main() {
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
+		fmt.Print(" > ")
 		item, _ := reader.ReadString('\n') // Prompt user for a word to translate
 
 		item = item[:len(item)-1]

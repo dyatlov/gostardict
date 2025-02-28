@@ -3,7 +3,6 @@ package stardict
 import (
 	"compress/gzip"
 	"io"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -40,7 +39,7 @@ func ReadDict(filename string, info *Info) (dict *Dict, err error) {
 		return
 	}
 
-	buffer, err := ioutil.ReadAll(r)
+	buffer, err := io.ReadAll(r)
 
 	if err != nil {
 		return

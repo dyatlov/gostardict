@@ -2,7 +2,7 @@ package stardict
 
 import (
 	"encoding/binary"
-	"io/ioutil"
+	"os"
 )
 
 // Sense has information belonging to single item position in dictionary
@@ -35,7 +35,7 @@ func (idx Idx) Get(item string) []*Sense {
 
 // ReadIndex reads dictionary index into a memory and returns in-memory index structure
 func ReadIndex(filename string, info *Info) (idx *Idx, err error) {
-	data, err := ioutil.ReadFile(filename)
+	data, err := os.ReadFile(filename)
 
 	// unable to read index
 	if err != nil {
@@ -100,7 +100,6 @@ func ReadIndex(filename string, info *Info) (idx *Idx, err error) {
 
 					// finished with one record
 					idx.Add(dataStr, dataOffset, dataSize)
-
 					continue
 				}
 				aIdx++

@@ -3,6 +3,7 @@ package stardict
 import (
 	"bytes"
 	"encoding/binary"
+	"log"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -140,11 +141,7 @@ func NewDictionary(path string, name string) (*Dictionary, error) {
 	idxPath := filepath.Join(path, name+".idx")
 	infoPath := filepath.Join(path, name+".ifo")
 
-	if _, err := os.Stat(infoPath); os.IsNotExist(err) {
-		return nil, err
-	}
-
-	if _, err := os.Stat(idxPath); os.IsNotExist(err) {
+	if _, err := os.Stat(idxPath); err != nil {
 		return nil, err
 	}
 
@@ -160,7 +157,14 @@ func NewDictionary(path string, name string) (*Dictionary, error) {
 	info, err := ReadInfo(infoPath)
 
 	if err != nil {
-		return nil, err
+		if !os.IsNotExist(err) {
+			return nil, err
+		}
+		log.Printf("ifo file not found, using defaults")
+		info = &Info{
+			Version: "3.0.0",
+			Options: make(map[string]string),
+		}
 	}
 
 	idx, err := ReadIndex(idxPath, info)
